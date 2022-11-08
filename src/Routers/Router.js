@@ -3,6 +3,7 @@ import Main from "../layout/Main";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Login from "../Pages/Forms/Login/Login";
 import Register from "../Pages/Forms/Register/Register";
+import Home from "../Pages/Home/Home";
 
 const router = createBrowserRouter([
     {
@@ -10,6 +11,10 @@ const router = createBrowserRouter([
         element: <Main></Main>,
         errorElement:<ErrorPage/>,
         children:[
+        {
+            path:"/",
+            element:<Home></Home>
+        },
          {
             path:"/register",
             element:<Register></Register>

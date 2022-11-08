@@ -16,6 +16,7 @@ const Navbar = () => {
 
     const formData = <>
         <li><Link to="/">Home</Link></li>
+        <li><Link to="/services">All Service</Link></li>
         <li><Link to="/addService">Add Service</Link></li>
 
 

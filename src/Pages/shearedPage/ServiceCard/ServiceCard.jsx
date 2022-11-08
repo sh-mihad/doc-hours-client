@@ -16,7 +16,7 @@ const ServiceCard = ({srv}) => {
                     
                     }</p>
                 <div className="card-actions justify-end">
-                <Link to={`/service/${_id} `} >
+                <Link to={`/services/${_id} `} >
                 <button className="btn btn-sm btn-outline">View Details</button>
                 </Link>
                 </div>

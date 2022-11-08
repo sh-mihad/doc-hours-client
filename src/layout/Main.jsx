@@ -1,9 +1,12 @@
 import React from 'react';
+import { Outlet } from 'react-router';
+import Navbar from '../Pages/shearedPage/NavBar/Navbar';
 
 const Main = () => {
     return (
         <div>
-            <h1 className='text-xl'>testing react</h1>
+            <Navbar></Navbar>
+           <Outlet></Outlet>
         </div>
     );
 };

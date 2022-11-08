@@ -1,21 +1,63 @@
-import React, { Children, createContext, useState } from 'react';
-import { getAuth } from "firebase/auth";
+import React, { Children, createContext, useEffect, useState } from 'react';
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import app from '../../firebase/firebase.config';
 
 const auth = getAuth(app);
 export const UserAuth = createContext();
-const AuthPorvider = ({Children}) => {
-    const [user,setuser] = useState("");
+
+const AuthPorvider = ({children}) => {
+    const [user,setUser] = useState("");
     const [loading,setLoading] = useState(true);
 
 
+    // create user
+    const createUser =(email,password)=>{
+     return createUserWithEmailAndPassword(auth,email,password)
+    }
+   
+    // loginUser
+    const loginUser =(email,password)=>{
+      return signInWithEmailAndPassword(auth,email,password)
+    }
+
+    // user ovserver 
+    useEffect(()=>{
+      const unsbscibe = onAuthStateChanged(auth,(curretnUser)=>{
+        setUser(curretnUser)
+        setLoading(false)
+      })
+
+      return ()=>{
+        unsbscibe()
+      }
+    },[])
+
+
+    // logout 
+    const logout =()=>{
+      return signOut(auth)
+    }
+
+    // update user profile
+    const addUserNmaeAndImage = (name,image)=>{
+      return updateProfile(auth.currentUser,{
+        displayName:name,
+        photoURL : image
+      })
+    }
+
     const userInfo = {
-        name:"sabbir hossen"
+      user,
+      loading,
+      createUser,
+      loginUser,
+      addUserNmaeAndImage,
+      logout
     }
 
     return (
       <UserAuth.Provider value={userInfo}>
-        {Children}
+        {children}
       </UserAuth.Provider>
     );
 };

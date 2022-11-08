@@ -29,6 +29,7 @@ const AddService = () => {
    .then(data=>{
     if(data.acknowledged){
         alert("Your data submited")
+        event.target.reset("")
     }
    })
    

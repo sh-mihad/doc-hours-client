@@ -11,6 +11,7 @@ const AuthPorvider = ({children}) => {
    
     const googleProvider = new GoogleAuthProvider();
     const registerInGoogle =()=>{
+      setLoading(true)
       return signInWithPopup(auth,googleProvider)
     }
 
@@ -18,11 +19,13 @@ const AuthPorvider = ({children}) => {
 
     // create user
     const createUser =(email,password)=>{
+      setLoading(true)
      return createUserWithEmailAndPassword(auth,email,password)
     }
    
     // loginUser
     const loginUser =(email,password)=>{
+      setLoading(true)
       return signInWithEmailAndPassword(auth,email,password)
     }
 
@@ -41,6 +44,7 @@ const AuthPorvider = ({children}) => {
 
     // logout 
     const logout =()=>{
+      
       return signOut(auth)
     }
 

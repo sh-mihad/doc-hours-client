@@ -1,12 +1,85 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router';
+import { UserAuth } from '../../Context/AuthProvider/AuthPorvider';
 
 const ServiceDetails = () => {
+    const {user} = useContext(UserAuth);
+    const{photoURL,displayName} = user;
+    // console.log(photoURL,displayName)
+    const [loadedreview,setLoadedreview] = useState([])
     const service = useLoaderData();
-    console.log(service);
+    const {_id,title,price,description,image} = service;
+
+    useEffect(()=>{
+        fetch("http://localhost:5000/review")
+        .then(res=>res.json())
+        .then(data=>setLoadedreview(data))
+    },[])
+   console.log(loadedreview);
+    const handleReview =(event)=>{
+        event.preventDefault()
+       const comment = event.target.comment.value;
+       const review ={
+        service : _id,
+        comment : comment,
+        image : photoURL,
+        name : displayName,
+       }
+
+       fetch("http://localhost:5000/review",{
+        method:"POST",
+        headers:{
+            "content-type":"application/json"
+        },
+        body: JSON.stringify(review)
+       })
+       .then(res=>res.json())
+       .then(data=>{
+        if(data.acknowledged){
+            alert("thank you for your review")
+            event.target.reset("")
+        }
+       })
+    }
+   
+    // console.log(user);
+   
     return (
-        <div>
-            this is service details page
+        <div className='grid grid-cols-1 w-4/5 mx-auto gap-7 lg:grid-cols-2 my-20'>
+           <div className="card w-full bg-base-100 shadow-xl">
+            <figure><img src={image} alt="Shoes" /></figure>
+            <div className="card-body">
+                <h2 className="card-title">
+                    {title}
+                    <div className="badge badge-secondary">{price} taka</div>
+                </h2>
+                <p>{
+                    description
+                    
+                    }</p>
+            </div>
+        </div>
+            <div className=''>
+               <div>
+               <h1 className=''>Add Your Review</h1>
+             {
+                user ? <>
+                  <form onSubmit={handleReview} className='w-full'>
+                <input type="text" placeholder="Type Your Review " name='comment' className="input input-bordered input-accent w-full " />
+                <input type="submit" className='btn btn-outline w-full mt-3' value="add review" />
+                </form>
+                </>
+                :
+                <>
+                <h1>Pls login first than you can add your review</h1>
+                <button className='btn btn-outline btn-sm'>Login / SignUp Now</button>
+                </>
+             }
+               </div>
+               <div className=''>
+                Loading all review
+               </div>
+            </div>
         </div>
     );
 };

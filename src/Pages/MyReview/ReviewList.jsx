@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const ReviewList = ({rvws,handleDelete}) => {
    const [service,setService] =useState({})
@@ -37,7 +38,7 @@ const ReviewList = ({rvws,handleDelete}) => {
         </td>
         
         <th>
-          <button  className="btn btn-ghost btn-xs">Edit </button>
+         <Link to={`/editRevew/${rvws._id}`}> <button  className="btn btn-ghost btn-xs">Edit </button></Link>
         </th>
       </tr>
     );

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-const ReviewList = ({rvws}) => {
+const ReviewList = ({rvws,handleDelete}) => {
    const [service,setService] =useState({})
-    // console.log(rvws);
+    // console.log(rvws._id);
     useEffect(()=>{
       fetch(`http://localhost:5000/services/${rvws?.service}`)
       .then(res=>res.json())
@@ -14,7 +14,7 @@ const ReviewList = ({rvws}) => {
         <tr>
         <th>
           <label>
-            <input type="checkbox" className="checkbox" />
+            <button onClick={()=>handleDelete(rvws._id)} className='text-red-600'>X</button>
           </label>
         </th>
         <td>
@@ -37,7 +37,7 @@ const ReviewList = ({rvws}) => {
         </td>
         
         <th>
-          <button className="btn btn-ghost btn-xs">details</button>
+          <button  className="btn btn-ghost btn-xs">Edit </button>
         </th>
       </tr>
     );

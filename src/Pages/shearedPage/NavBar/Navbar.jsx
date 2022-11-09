@@ -17,8 +17,13 @@ const Navbar = () => {
     const formData = <>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/services">All Service</Link></li>
-        <li><Link to="/my-reviews">My Reviews</Link></li>
-        <li><Link to="/addService">Add Service</Link></li>
+        <li><Link to="/blogs">Blogs</Link></li>
+        {
+            user && <>
+                <li><Link to="/my-reviews">My Reviews</Link></li>
+                <li><Link to="/addService">Add Service</Link></li>
+            </>
+        }
 
 
     </>
@@ -53,10 +58,10 @@ const Navbar = () => {
                     user ?
                         <>
                             <button onClick={logoutUser} to="/login" className="btn  btn-accent mr-4 text-white">Logout</button>
-                            <div  className="avatar">
-                            <div className="w-12 rounded-full">
-                                <img src={user?.photoURL}  title={user?.displayName} alt=""/>
-                            </div>
+                            <div className="avatar">
+                                <div className="w-12 rounded-full">
+                                    <img src={user?.photoURL} title={user?.displayName} alt="" />
+                                </div>
                             </div>
                         </>
                         :

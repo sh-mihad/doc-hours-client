@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserAuth } from '../../Context/AuthProvider/AuthPorvider';
 import ReviewList from './ReviewList';
+import { ToastContainer, toast } from 'react-toastify';
 
 const MyReview = () => {
     const { user } = useContext(UserAuth)
@@ -13,6 +14,23 @@ const MyReview = () => {
             .then(data => setReviws(data))
     }, [user?.email])
 
+    const handleDelete=(_id)=>{
+        const confirmation = window.confirm(`Do you want to Delete this item?`);
+        // console.log(confirmation)
+        if(confirmation){
+          fetch(`http://localhost:5000/review/${_id}`,{
+           method:"DELETE"
+          })
+          .then(res=>res.json())
+          .then(data=>{
+            if(data.deletedCount>0){
+               alert("Your Post is Deleted")
+               const newReview = revews.filter(rvws=>rvws._id !==_id)
+               setReviws(newReview);
+            }
+          })
+         }
+       }
 
 
 
@@ -24,13 +42,11 @@ const MyReview = () => {
                     <thead>
                         <tr>
                             <th>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
+                               Delete
                             </th>
-                            <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
+                            <th>Service </th>
+                            <th>Review</th>
+                            <th>Option</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -38,7 +54,7 @@ const MyReview = () => {
 
                       {
                         revews?.map(rvws=><ReviewList 
-                        key={rvws._id} rvws={rvws}
+                        key={rvws._id} rvws={rvws} handleDelete={handleDelete}
                         ></ReviewList>)
                       }
                     </tbody>

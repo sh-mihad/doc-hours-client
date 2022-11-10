@@ -7,7 +7,9 @@ const EditReview = () => {
     const abc = useLoaderData();
     const navigate = useNavigate()
     // console.log(abc)
+  
 
+    // Button Hnadle function
     const handleEdit = (event) => {
         event.preventDefault();
         const edtiValue = event.target.comment.value;

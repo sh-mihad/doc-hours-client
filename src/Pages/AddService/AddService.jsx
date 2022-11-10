@@ -1,4 +1,5 @@
 import React from 'react';
+import {Helmet} from "react-helmet";
 
 const AddService = () => {
 
@@ -39,6 +40,9 @@ const AddService = () => {
 
     return (
         <div className='my-20 w-4/5 lg:w-3/5 mx-auto bg-slate-300 p-11'>
+            <Helmet>
+                <title>Service Add Page</title>
+            </Helmet>
             <form onSubmit={handleAddService}>
                 <div className='flex justify-between'>
                 <input type="text" placeholder="Service Title" name='title' className="input input-bordered  w-full max-w-xs" required />

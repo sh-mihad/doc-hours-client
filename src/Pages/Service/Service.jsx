@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import ServiceCard from '../shearedPage/ServiceCard/ServiceCard';
+import {Helmet} from "react-helmet";
 
 const Service = () => {
     const [service,setService] = useState([])
+    // const [loading,setLoading] = useState(true)
     useEffect(()=>{
         fetch("http://localhost:5000/services")
         .then(res=>res.json())
@@ -12,7 +13,11 @@ const Service = () => {
 
     // console.log(service)
     return (
+
         <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+          <Helmet>
+            <title>All Service </title>
+          </Helmet>
       <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
         <div>
           <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
@@ -53,9 +58,10 @@ const Service = () => {
       </div>
      <div className='grid grid-cols-1 lg:grid-cols-3 gap-9'>
         {
-            service?.map(srv =><ServiceCard
+           service.length < 1 ? <div className='w-1/2 mx-auto text-center'><button className="btn loading">loading</button></div> :
+           service?.map(srv =><ServiceCard
             key={srv._id} srv={srv}
-            ></ServiceCard> )
+            ></ServiceCard> ) 
         }
      </div>
   

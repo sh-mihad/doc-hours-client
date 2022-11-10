@@ -55,7 +55,7 @@ const router = createBrowserRouter([
          {
             path:"/editRevew/:id",
             loader:({params})=>fetch(`http://localhost:5000/reaviews/${params.id}`) ,
-            element:<EditReview></EditReview>
+            element:<PrivetRoute><EditReview></EditReview></PrivetRoute>
          }
         ]
     }

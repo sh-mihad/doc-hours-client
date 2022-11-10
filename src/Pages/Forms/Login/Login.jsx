@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserAuth } from '../../../Context/AuthProvider/AuthPorvider';
 import {useLocation, useNavigate } from 'react-router';
+import {Helmet} from "react-helmet";
 
 const Login = () => {
   const { loginUser ,registerInGoogle} = useContext(UserAuth)
@@ -21,11 +22,29 @@ const Login = () => {
     const password = form.password.value;
     loginUser(email, password).then(res => {
       const user = res.user;
-      // console.log(user)
-      navigation(from)
+      const currentuser ={
+        email : user.email
+      }
+
+      fetch("http://localhost:5000/jwt",{
+        method:"POST",
+        headers:{
+          "content-type":"application/json"
+        },
+        body:JSON.stringify(currentuser)
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        console.log(data)
+        localStorage.setItem("userToken",data.token)
+        navigation(from)
+      })
+
+      // navigation(from)
     }).catch(err => setError(err))
   }
 
+  // Google Singn in handle 
   const handleGoogleSignIn =()=>{
     setError("")
     registerInGoogle()
@@ -40,6 +59,11 @@ const Login = () => {
 
   return (
     <div className="card w-4/5 lg:w-1/3 mx-auto  shadow-2xl bg-base-100 my-28">
+      <Helmet>
+        <title>
+          Login Page
+        </title>
+      </Helmet>
       <div className="card-body">
         <form onSubmit={handleRegister} >
 

@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserAuth } from '../../../Context/AuthProvider/AuthPorvider';
-
+import { useNavigate } from 'react-router';
+import {Helmet} from "react-helmet";
 const Register = () => {
 
   const { createUser, addUserNmaeAndImage ,registerInGoogle} = useContext(UserAuth);
   const [error,setError] =useState("")
   // console.log(addUserNmaeAndImage)
+ const navigate = useNavigate()
 
   const handleRegister = event => {
     event.preventDefault()
@@ -20,7 +22,7 @@ const Register = () => {
     createUser(email, password)
       .then(result => {
         const user = result.user;
-        console.log(user)
+        navigate("/")
         addUserNmaeAndImage(name, image)
           .then(() => { })
           .catch((error) => console.error(error))
@@ -29,12 +31,13 @@ const Register = () => {
 
   }
 
+  //google signUp handler
   const handleGoogleSignIn =()=>{
     setError("")
     registerInGoogle()
     .then(res=>{
       const user = res.user;
-      console.log(user);
+      navigate("/")
     })
     .catch(error=>setError(error))
   }
@@ -44,6 +47,9 @@ const Register = () => {
 
   return (
     <div className="card  my-28 w-4/5 lg:w-1/3 mx-auto  shadow-2xl bg-base-100">
+      <Helmet>
+        <title>Register Page</title>
+      </Helmet>
       <div className="card-body">
         <form onSubmit={handleRegister} >
           <div className="form-control">

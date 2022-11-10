@@ -41,7 +41,7 @@ const router = createBrowserRouter([
          },
          {
             path : "/services/:id",
-            loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`),
+            loader: ({params})=> fetch(`https://service-server-sh-mihad.vercel.app/services/${params.id}`),
             element:<ServiceDetails/>
          },
          {
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
          },
          {
             path:"/editRevew/:id",
-            loader:({params})=>fetch(`http://localhost:5000/reaviews/${params.id}`) ,
+            loader:({params})=>fetch(`https://service-server-sh-mihad.vercel.app/reaviews/${params.id}`) ,
             element:<PrivetRoute><EditReview></EditReview></PrivetRoute>
          }
         ]

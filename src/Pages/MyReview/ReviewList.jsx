@@ -5,7 +5,7 @@ const ReviewList = ({rvws,handleDelete}) => {
    const [service,setService] =useState({})
     // console.log(rvws._id);
     useEffect(()=>{
-      fetch(`http://localhost:5000/services/${rvws?.service}`)
+      fetch(`https://service-server-sh-mihad.vercel.app/services/${rvws?.service}`)
       .then(res=>res.json())
       .then(data=>setService(data))
 

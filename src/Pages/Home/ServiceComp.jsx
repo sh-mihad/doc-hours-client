@@ -5,7 +5,7 @@ import ServiceCard from '../shearedPage/ServiceCard/ServiceCard';
 const ServiceComp = () => {
     const [service,setService] = useState([])
     useEffect(()=>{
-        fetch("http://localhost:5000/3service")
+        fetch("https://service-server-sh-mihad.vercel.app/3service")
         .then(res=>res.json())
         .then(data=>setService(data))
     },[])

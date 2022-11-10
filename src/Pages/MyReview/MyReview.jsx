@@ -13,7 +13,7 @@ const MyReview = () => {
     const navigation = useNavigate()
 
     useEffect(() => {
-        fetch(`http://localhost:5000/myreviews?email=${user?.email}`,{
+        fetch(`https://service-server-sh-mihad.vercel.app/myreviews?email=${user?.email}`,{
             headers: {
                authorizaton:`Bearer ${localStorage.getItem("userToken")}`
             }
@@ -32,7 +32,7 @@ const MyReview = () => {
         const confirmation = window.confirm(`Do you want to Delete this item?`);
         // console.log(confirmation)
         if(confirmation){
-          fetch(`http://localhost:5000/review/${_id}`,{
+          fetch(`https://service-server-sh-mihad.vercel.app/review/${_id}`,{
            method:"DELETE"
           })
           .then(res=>res.json())

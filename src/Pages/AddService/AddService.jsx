@@ -20,7 +20,7 @@ const AddService = () => {
     };
   
     console.log(title,price,image,description);
-   fetch("http://localhost:5000/service",{
+   fetch("https://service-server-sh-mihad.vercel.app/service",{
     method: "POST",
     headers:{
         "content-type" : "application/json"

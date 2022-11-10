@@ -18,7 +18,7 @@ const EditReview = () => {
             review: edtiValue
         }
         
-        fetch(`http://localhost:5000/update/${abc._id}`, {
+        fetch(`https://service-server-sh-mihad.vercel.app/update/${abc._id}`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json'

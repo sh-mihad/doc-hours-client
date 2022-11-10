@@ -1,5 +1,6 @@
 import React from 'react';
 import {Helmet} from "react-helmet";
+import Swal from 'sweetalert2'
 
 const AddService = () => {
 
@@ -29,7 +30,11 @@ const AddService = () => {
    .then(res=>res.json())
    .then(data=>{
     if(data.acknowledged){
-        alert("Your data submited")
+        Swal.fire(
+            'Done',
+            'Your service is successfuly done',
+            'success'
+          )
         event.target.reset("")
     }
    })

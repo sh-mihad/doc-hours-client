@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+
 const ReviewCard = ({ review }) => {
     const { comment, image,  name } = review
     return (

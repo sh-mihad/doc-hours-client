@@ -3,6 +3,7 @@ import { UserAuth } from '../../Context/AuthProvider/AuthPorvider';
 import ReviewList from './ReviewList';
 import {Helmet} from "react-helmet";
 import { useNavigate } from 'react-router';
+import Swal from 'sweetalert2'
 // import { ToastContainer, toast } from 'react-toastify';
 
 const MyReview = () => {
@@ -37,7 +38,11 @@ const MyReview = () => {
           .then(res=>res.json())
           .then(data=>{
             if(data.deletedCount>0){
-               alert("Your Post is Deleted")
+                Swal.fire(
+                    'Deleteted',
+                    'Your review is successfuly delted',
+                    'success'
+                  )
                const newReview = revews.filter(rvws=>rvws._id !==_id)
                setReviws(newReview);
             }

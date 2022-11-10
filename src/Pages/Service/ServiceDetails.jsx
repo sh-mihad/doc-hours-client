@@ -3,6 +3,7 @@ import { useLoaderData } from 'react-router';
 import { UserAuth } from '../../Context/AuthProvider/AuthPorvider';
 import { Link } from 'react-router-dom';
 import ReviewCard from './ReviewCard';
+import Swal from 'sweetalert2'
 
 const ServiceDetails = () => {
     const { user } = useContext(UserAuth);
@@ -43,7 +44,11 @@ const ServiceDetails = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.acknowledged) {
-                    alert("thank you for your review")
+                    Swal.fire(
+                        'Thanks',
+                        'Thank you for your review',
+                        'success'
+                      )
                     event.target.reset("")
                     fetch("http://localhost:5000/review")
                     .then(res => res.json())

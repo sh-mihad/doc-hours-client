@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
+import Swal from 'sweetalert2'
 
 
 const EditReview = () => {
@@ -27,7 +28,11 @@ const EditReview = () => {
             .then(res =>res.json())
             .then(data => {
                 if(data.modifiedCount>0){
-                    alert("your review is updated")
+                    Swal.fire(
+                        'Done',
+                        'Your review is successfuly Updated',
+                        'success'
+                      )
                     navigate("/my-reviews")
                 }
             })

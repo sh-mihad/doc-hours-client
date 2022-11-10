@@ -1,11 +1,19 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserAuth } from '../../../Context/AuthProvider/AuthPorvider';
+import {useLocation, useNavigate } from 'react-router';
 
 const Login = () => {
   const { loginUser ,registerInGoogle} = useContext(UserAuth)
   const [error,setError] = useState("")
 
+// reacct-router hooks
+  const navigation = useNavigate()
+  const location = useLocation()
+  const from = location.state?.from?.pathname || "/"
+
+
+// event handler
   const handleRegister = event => {
     event.preventDefault()
     const form = event.target;
@@ -13,7 +21,8 @@ const Login = () => {
     const password = form.password.value;
     loginUser(email, password).then(res => {
       const user = res.user;
-      console.log(user)
+      // console.log(user)
+      navigation(from)
     }).catch(err => setError(err))
   }
 
@@ -22,7 +31,8 @@ const Login = () => {
     registerInGoogle()
     .then(res=>{
       const user = res.user;
-      console.log(user);
+      // console.log(user);
+      navigation(from)
     })
     .catch(error=>setError(error))
   }

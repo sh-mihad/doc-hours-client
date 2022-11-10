@@ -40,7 +40,11 @@ const MyReview = () => {
     return (
         <div>
             <div className="overflow-x-auto w-full">
-                <table className="table w-full">
+                {
+                    revews.length <1 ?
+                    <h1 className='text-4xl text-red-500 font-bold py-16 text-center'>'No reviews were added'</h1>
+                    :
+                    <table className="table w-full">
 
                     <thead>
                         <tr>
@@ -56,14 +60,17 @@ const MyReview = () => {
                     <tbody>
 
                       {
-                        revews?.map(rvws=><ReviewList 
+                     
+                      revews?.map(rvws=><ReviewList 
                         key={rvws._id} rvws={rvws} handleDelete={handleDelete}
                         ></ReviewList>)
+                       
                       }
                     </tbody>
 
 
                 </table>
+                }
             </div>
         </div>
     );

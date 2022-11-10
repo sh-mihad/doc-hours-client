@@ -10,6 +10,7 @@ import EditReview from "../Pages/MyReview/EditReview";
 import MyReview from "../Pages/MyReview/MyReview";
 import Service from "../Pages/Service/Service";
 import ServiceDetails from "../Pages/Service/ServiceDetails";
+import PrivetRoute from "./PrivetRouts/PrivetRoute";
 
 const router = createBrowserRouter([
     {
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
          },
          {
             path:"addService",
-            element:<AddService/>
+            element:<PrivetRoute><AddService/></PrivetRoute>
             
          },
          {
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
          },
          {
             path :"/my-reviews",
-            element:<MyReview/>
+            element:<PrivetRoute><MyReview/></PrivetRoute>
          },
          {
             path:"/blogs",

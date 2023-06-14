@@ -16,7 +16,7 @@ const Faq = () => {
       >
         <summary className="flex cursor-pointer items-center justify-between gap-1.5">
           <h2 className="text-lg font-medium text-white">
-            How much time do i need to receive a product?
+            Did I need register or login for getting service?
           </h2>
 
           <span className="shrink-0 rounded-full bg-white p-1.5 text-accent sm:p-3">
@@ -36,8 +36,7 @@ const Faq = () => {
         </summary>
 
         <p className="mt-4 leading-relaxed text-white">
-          We distribute our products by a product delivery service. You can
-          receive a purchased product within 2-3 days.
+          Yes! Before getting the service you need to login or register first
         </p>
       </details>
       <details
